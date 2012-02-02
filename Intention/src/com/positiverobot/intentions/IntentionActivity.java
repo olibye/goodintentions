@@ -4,12 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 
+/**
+ * @author byeo
+ * 
+ */
 public class IntentionActivity extends Activity {
 
 	/** Called when the activity is first created. */
@@ -44,15 +49,23 @@ public class IntentionActivity extends Activity {
 		return apps;
 	}
 
+	/**
+	 * http://developer.android.com/reference/android/content/pm/PackageManager.html#GET_INTENT_FILTERS
+	 * @param getSysPackages
+	 * @return
+	 */
 	private ArrayList<PInfo> getInstalledApps(boolean getSysPackages) {
 		ArrayList<PInfo> res = new ArrayList<PInfo>();
 		PackageManager packageManager = getPackageManager();
-		List<PackageInfo> packs = packageManager.getInstalledPackages(0);
+		List<PackageInfo> packs = packageManager
+				.getInstalledPackages(PackageManager.GET_ACTIVITIES
+						| PackageManager.GET_INTENT_FILTERS);
 		for (int i = 0; i < packs.size(); i++) {
 			PackageInfo p = packs.get(i);
 			if ((!getSysPackages) && (p.versionName == null)) {
 				continue;
 			}
+			
 			PInfo newInfo = new PInfo();
 			newInfo.appname = p.applicationInfo.loadLabel(packageManager)
 					.toString();
@@ -60,8 +73,11 @@ public class IntentionActivity extends Activity {
 			newInfo.versionName = p.versionName;
 			newInfo.versionCode = p.versionCode;
 			newInfo.icon = p.applicationInfo.loadIcon(packageManager);
+			
+						
 			res.add(newInfo);
 		}
 		return res;
 	}
+	
 }
