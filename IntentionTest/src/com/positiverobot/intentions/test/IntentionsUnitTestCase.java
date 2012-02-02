@@ -77,11 +77,16 @@ public class IntentionsUnitTestCase extends
 			int eventType = xpp.getEventType();
 			while (eventType != XmlPullParser.END_DOCUMENT) {
 				if (eventType == XmlPullParser.START_DOCUMENT) {
-					Log.v(packageInfo.packageName, "Start document");
 				} else if (eventType == XmlPullParser.START_TAG) {
-					Log.v(packageInfo.packageName, "Start tag " + xpp.getName());
+					if ("action".equals(xpp.getName())) {
+						String name = xpp.getAttributeValue(0);
+						Log.v(packageInfo.packageName, "Action Tag:" + name);
+					}
+					if ("category".equals(xpp.getName())) {
+						String name = xpp.getAttributeValue(0);
+						Log.v(packageInfo.packageName, "Category Tag:" + name);
+					}
 				} else if (eventType == XmlPullParser.END_TAG) {
-					Log.v(packageInfo.packageName, "End tag " + xpp.getName());
 				} else if (eventType == XmlPullParser.TEXT) {
 					Log.v(packageInfo.packageName, "Text " + xpp.getText());
 				}
