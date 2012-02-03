@@ -86,6 +86,10 @@ public class IntentionsUnitTestCase extends
 						String name = xpp.getAttributeValue(0);
 						Log.v(packageInfo.packageName, "Category Tag:" + name);
 					}
+					if ("data".equals(xpp.getName())) {
+						String name = xpp.getAttributeValue(0);
+						Log.v(packageInfo.packageName, "Data Tag:" + name);
+					}
 				} else if (eventType == XmlPullParser.END_TAG) {
 				} else if (eventType == XmlPullParser.TEXT) {
 					Log.v(packageInfo.packageName, "Text " + xpp.getText());
