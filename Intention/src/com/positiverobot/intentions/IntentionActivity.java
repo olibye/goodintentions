@@ -4,20 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
-import android.content.pm.ActivityInfo;
+import android.app.ListActivity;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ArrayAdapter;
 
 /**
  * @author byeo
  * 
  */
-public class IntentionActivity extends Activity {
+public class IntentionActivity extends ListActivity {
 
-	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -50,7 +50,9 @@ public class IntentionActivity extends Activity {
 	}
 
 	/**
-	 * http://developer.android.com/reference/android/content/pm/PackageManager.html#GET_INTENT_FILTERS
+	 * http://developer.android.com/reference/android/content/pm/PackageManager.
+	 * html#GET_INTENT_FILTERS
+	 * 
 	 * @param getSysPackages
 	 * @return
 	 */
@@ -65,19 +67,19 @@ public class IntentionActivity extends Activity {
 			if ((!getSysPackages) && (p.versionName == null)) {
 				continue;
 			}
-			
+
 			PInfo newInfo = new PInfo();
 			newInfo.appname = p.applicationInfo.loadLabel(packageManager)
 					.toString();
 			newInfo.pname = p.packageName;
 			newInfo.versionName = p.versionName;
 			newInfo.versionCode = p.versionCode;
+
 			newInfo.icon = p.applicationInfo.loadIcon(packageManager);
-			
-						
+
 			res.add(newInfo);
 		}
 		return res;
 	}
-	
+
 }

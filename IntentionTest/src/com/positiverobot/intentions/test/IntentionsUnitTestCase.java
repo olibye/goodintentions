@@ -39,7 +39,6 @@ public class IntentionsUnitTestCase extends
 		 * Possible? getPackageManager().queryIntentActivities Could be used to
 		 * find resolvers
 		 */
-
 	}
 
 	/**
@@ -99,5 +98,9 @@ public class IntentionsUnitTestCase extends
 
 			xpp.close();
 		}
+	}
+	
+	public void testJDOM() {
+		
 	}
 }
